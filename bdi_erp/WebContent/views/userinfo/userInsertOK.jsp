@@ -1,3 +1,4 @@
+<%@page import="com.bdi.erp.conection.DBConnection"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,13 +11,7 @@ String uiDesc = request.getParameter("uiDesc");
 String uiAge = request.getParameter("uiAge");
 String diNo = request.getParameter("diNo");
 
-String driver = "org.mariadb.jdbc.Driver";
-String url = "jdbc:mariadb://localhost:3306/bdi";
-String id = "bdi";
-String pwd = "bditest";
-
-Class.forName(driver);
-Connection con = DriverManager.getConnection(url,id,pwd);
+Connection con = DBConnection.getCon();
 String sql = "insert into user_info(uiName, uiId, uiPwd, uiDesc, uiAge, diNo) values(?,?,?,?,?,?)";
 PreparedStatement ps = con.prepareStatement(sql);
 ps.setString(1,uiName);
@@ -26,6 +21,7 @@ ps.setString(4,uiDesc);
 ps.setString(5,uiAge);
 ps.setString(6,diNo);
 int cnt = ps.executeUpdate();
+DBConnection.close();
 if(cnt==1){
 %>
 <script>
