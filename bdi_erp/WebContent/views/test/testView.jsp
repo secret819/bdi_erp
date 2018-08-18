@@ -8,75 +8,63 @@
 <body>
 <div class="container">
 <%
-String uiName = "";
-String uiId = "";
-String uiDesc = "";
-int uiNo = Integer.parseInt(request.getParameter("uiNo"));
-int uiAge = 0;
-int diNo = 0;
+String tId = "";
+String tBirth = "";
+String tContent = "";
+int tNo = Integer.parseInt(request.getParameter("tNo"));
 
 Connection con = DBConnection.getCon();
-String sql = "select uiName, uiId, uiDesc, uiNo, uiAge, diNo from user_info where uiNo=?";
+String sql = "select tId, tBirth, tContent from Test where tNo=?";
 PreparedStatement ps = con.prepareStatement(sql);
-ps.setInt(1,uiNo);
+ps.setInt(1,tNo);
 ResultSet rs = ps.executeQuery();
 if(rs.next()){
-	uiName = rs.getString("uiName");
-	uiId = rs.getString("uiId");
-	uiDesc = rs.getString("uiDesc");
-	uiAge = rs.getInt("uiAge");
-	diNo = rs.getInt("diNo");
+	tId = rs.getString("tId");
+	tBirth = rs.getString("tBirth");
+	tContent = rs.getString("tContent");
 }
 %>
-<form action="<%=rPath%>/views/userinfo/userUpdateOK.jsp" onsubmit="return checkVal()">
+<form action="<%=rPath%>/views/test/testUpdateOK.jsp" onsubmit="return checkVal1()">
 	<fieldset>
 		<legend>유저 수정</legend>
 		<table class="table table-bordered">
 			<tr>
 				<th>번호</th>
-				<td><%=uiNo%></td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td><input type="text" name="uiName" value="<%=uiName%>"></td>
+				<td><%=tNo%></td>
 			</tr>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="uiId" value="<%=uiId%>"></td>
+				<td><input type="text" name="tId" value="<%=tId%>"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" name="uiPwd"></td>
+				<td><input type="password" name="tPwd"></td>
 			</tr>
 			<tr>
 				<th>유저설명</th>
-				<td><textarea name="uiDesc"><%=uiDesc%></textarea></td>
+				<td><textarea name="tContent"><%=tContent%></textarea></td>
 			</tr>
 			<tr>
-				<th>나이</th>
-				<td><input type="number" name="uiAge" min="1" max="120" value="<%=uiAge%>"></td>
-			</tr>
-			<tr>
-				<th>부서번호</th>
-				<td><input type="number" name="diNo" min="1" max="3" value="<%=diNo%>"></td>
+				<th>생년월일</th>
+				<td><input type="date" name="tBirth" value="<%=tBirth%>"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
 					<button>수정</button>
-					<button type="button" onclick="deleteUser()">삭제</button>
+					<button type="button" onclick="deleteTest()">삭제</button>
 			</tr>
 		</table>
 	</fieldset>
-	<input type="hidden" name="uiNo" value="<%=uiNo%>">
+	<input type="hidden" name="uiNo" value="<%=tNo%>">
 </form>
 </div>
 <script>
-	function deleteUser(){
+	function deleteTest(){
 		if(confirm("삭제하시겠습니까?")){
-			location.href="<%=rPath%>/views/userinfo/userDeleteOK.jsp?uiNo=<%=uiNo%>";
+			location.href="<%=rPath%>/views/test/testDeleteOK.jsp?uiNo=<%=tNo%>";
 		}
 	}
-	function checkVal(){
+	function checkVal1(){
 		var objs = document.querySelectorAll('input');
 		for(var i=0;i<objs.length;i++){
 			if(objs[i].type!="number"){
