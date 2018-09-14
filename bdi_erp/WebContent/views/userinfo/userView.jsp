@@ -1,7 +1,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="com.bdi.erp.conection.DBConnection"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="com.bdi.erp.common.DBConnection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/common.jsp"%>
@@ -16,7 +16,9 @@ int uiAge = 0;
 int diNo = 0;
 
 Connection con = DBConnection.getCon();
-String sql = "select uiName, uiId, uiDesc, uiNo, uiAge, diNo from user_info where uiNo=?";
+String sql = "select uiName, uiId, uiDesc, uiNo, uiAge,"; 
+sql += " diNo from user_info";
+sql += " where uiNo=?";
 PreparedStatement ps = con.prepareStatement(sql);
 ps.setInt(1,uiNo);
 ResultSet rs = ps.executeQuery();
@@ -64,6 +66,7 @@ if(rs.next()){
 				<td colspan="2" align="center">
 					<button>수정</button>
 					<button type="button" onclick="deleteUser()">삭제</button>
+				</td>
 			</tr>
 		</table>
 	</fieldset>
@@ -81,17 +84,17 @@ if(rs.next()){
 		for(var i=0;i<objs.length;i++){
 			if(objs[i].type!="number"){
 				if(objs[i].value.length<1 || objs[i].value.length>=30){
-					alert(objs[i].name + "의 값을 확인해주세요.");
+					alert(objs[i].name + "의 값을 확인해주세요.")
 					objs[i].focus();
 					return false;
 				}
 			}else{
 				if(objs[i].value<1){
-					alert(objs[i].name + "의 값을 확인해주세요.");
+					alert(objs[i].name + "의 값을 확인해주세요.")
 					objs[i].focus();
 					return false;
 				}
-			}			
+			}
 		}
 		var obj = document.querySelector('textarea');
 		if(obj.value.length>=2000){

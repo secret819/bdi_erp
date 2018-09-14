@@ -19,7 +19,7 @@ String url = request.getParameter("page");
 if(url==null){
 	url = "r1.jsp";
 }
-url = "/test/" + url;
+url = "/test/" +url;
 %>
 	<div class="container">
 		<div class="left">

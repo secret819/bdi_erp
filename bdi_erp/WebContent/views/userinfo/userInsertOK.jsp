@@ -1,4 +1,4 @@
-<%@page import="com.bdi.erp.conection.DBConnection"%>
+<%@page import="com.bdi.erp.common.DBConnection"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,7 +12,8 @@ String uiAge = request.getParameter("uiAge");
 String diNo = request.getParameter("diNo");
 
 Connection con = DBConnection.getCon();
-String sql = "insert into user_info(uiName, uiId, uiPwd, uiDesc, uiAge, diNo) values(?,?,?,?,?,?)";
+String sql = "insert into user_info(uiName, uiId, uiPwd,";
+sql += "uiDesc, uiAge, diNo) values(?,?,?,?,?,?)";
 PreparedStatement ps = con.prepareStatement(sql);
 ps.setString(1,uiName);
 ps.setString(2,uiId);
@@ -31,3 +32,4 @@ if(cnt==1){
 <%
 }
 %>
+

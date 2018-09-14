@@ -5,6 +5,7 @@
 String menu = request.getParameter("menu");
 String rightUrl = rPath + "/views";
 String smenu = request.getParameter("smenu");
+
 if(menu==null || menu.equals("home")){
 	rightUrl += "/main.jsp";
 }else{

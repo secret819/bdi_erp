@@ -1,7 +1,5 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="com.bdi.erp.conection.DBConnection"%>
-<%@page import="java.sql.Connection"%>
+<%@page import="com.bdi.erp.common.DBConnection"%>
+<%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/common.jsp"%>
@@ -23,3 +21,4 @@ if(cnt==1){
 <%
 }
 %>
+

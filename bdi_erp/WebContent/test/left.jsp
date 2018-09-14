@@ -15,7 +15,7 @@ if(p==null){
 <script>
 	function chMenu(obj){
 		if(obj.value!=""){
-			location.href="/test/select.jsp?page=" + obj.value;
+			location.href="/test/select.jsp?page=" + obj.value;	
 		}
 	}
 </script>
